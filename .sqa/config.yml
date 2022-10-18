@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/euCanSHare/VRE_data_api:
+      branch: master
+      repo: https://github.com/euCanSHare/VRE_data_api
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/euCanSHare/VRE_data_api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-bronze-cuttlefish.sh
+        container: qc.acc_crappy-cerise-shark
+  QC.Doc:
+    repos:
+      github.com/euCanSHare/VRE_data_api find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-chestnut-guppy.sh
+        container: qc.doc_shabby-sepia-rabbit
+      github.com/euCanSHare/VRE_data_api git:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-razzmatazz-turtle.sh
+        container: qc.doc_ugly-magenta-frigatebird
+      github.com/euCanSHare/VRE_data_api markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-tangerine-chicken.sh
+        container: qc.doc_frumpy-firebrick-dolphin
+  QC.Lic:
+    repos:
+      github.com/euCanSHare/VRE_data_api licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-thistle-wolfhound.sh
+        container: qc.lic_skanky-ochre-dachshund
+  QC.Sty:
+    repos:
+      github.com/euCanSHare/VRE_data_api jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-teal-macaw.sh
+        container: qc.sty_bluesy-malachite-binturong
+      github.com/euCanSHare/VRE_data_api stylelint:
+        commands:
+        - /usr/bin/env sh .sqa/script.flaky-plum-orangutan.sh
+        container: qc.sty_stealthy-mauve-rottweiler
+  QC.Ver:
+    repos:
+      github.com/euCanSHare/VRE_data_api get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-eggplant-nightingale.sh
+        container: qc.ver_breezy-ochre-angelfish
+timeout: 1800
